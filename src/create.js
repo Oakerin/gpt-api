@@ -1,7 +1,7 @@
 import fs from "fs";
 import { config } from "../config.mjs";
 
-const inputFileName = './src/inputData/batchinput.jsonl';
+const inputFileName = `./src/inputData/${config.inputFileName}.jsonl`;
 //const inputFileName = './src/inputData/batchinput3_100x.jsonl'
 const repeatCount = 2
 

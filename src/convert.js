@@ -1,7 +1,9 @@
 import readline from 'readline';
 import fs from'fs';
+import { config } from "../config.mjs";
 
-const parsedOutputFileName = './src/outputData/parsedOutput.txt'
+const outputFileName = `./src/outputData/${config.outputFileName}.jsonl`
+const parsedOutputFileName = `./src/outputData/${config.outputFileName}.txt`
 let res = [];
 let text = ''
 
@@ -11,7 +13,7 @@ function processLine(line) {
 }
 
 const readInterface = readline.createInterface({
-    input: fs.createReadStream('./src/outputData/output.jsonl'),
+    input: fs.createReadStream(outputFileName),
     output: process.stdout,
     console: false
 });
@@ -38,7 +40,6 @@ readInterface.on('close', function() {
         })
 
     console.log(text);
-
 
     fs.writeFile(parsedOutputFileName, text, function(error){
         if (error){ 

@@ -9,7 +9,7 @@ const openai = new OpenAI({
     apiKey: config.apiKey
 });
 
-const waitTime = config.waitTime
+const waitTime = config.retryInterval
 const maxRetryCount = config.maxRetryCount
 const inputFileName = config.inputFileName
 const outputFileName = config.outputFileName
