@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { config } from "../config";
+import { config } from "../config.mjs";
 import { getResult } from "./utils/getResult.mjs";
 import { checkStatus } from "./utils/checkStatus.mjs";
 import { createBatch } from "./utils/createBatch.mjs";
