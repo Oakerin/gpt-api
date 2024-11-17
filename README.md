@@ -1,4 +1,5 @@
 # gpt-api
+Chat gpt connector to make some sience
 
 ## First steps 
 - [Install node.js](https://nodejs.org/en) v22.11.0 and higher
@@ -10,4 +11,3 @@
 - `npm run create` - create a set of test cases
 - `npm run send` - send test ceases to chat-gpt
 - `npm run convert` - convert chat-gpt output to readble file
-
