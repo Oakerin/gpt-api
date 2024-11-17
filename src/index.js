@@ -9,13 +9,15 @@ const openai = new OpenAI({
     apiKey: config.apiKey
 });
 
-const waitTime = 30 * 1000 // msec
-const maxRetryCount = 10
+const waitTime = config.waitTime
+const maxRetryCount = config.maxRetryCount
+const inputFileName = config.inputFileName
+const outputFileName = config.outputFileName
 
 async function main() {
   let retryCount = 0
   let intervalId
-  const file = await createFile(openai, config.inputFileName)
+  const file = await createFile(openai, inputFileName)
   const batch = await createBatch(openai, file)
 
   console.log('****************************************');
@@ -33,7 +35,7 @@ async function main() {
 
     const batchStatus = await checkStatus(openai, batch.id)
     if (batchStatus.status === 'completed') {
-        await getResult(openai, batchStatus, config.outputFileName)
+        await getResult(openai, batchStatus, outputFileName)
         clearInterval(intervalId);
         // todo convert result
     }
