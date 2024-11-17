@@ -1,0 +1,17 @@
+{
+  "name": "gpt-faq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "create": "node src/createInputData.js",
+    "send": "node src/index.js",
+    "convert": "node src/convertOutput.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "openai": "^4.72.0"
+  }
+}
