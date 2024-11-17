@@ -1,2 +1,7 @@
+# libs
 node_modules/
+
+# app
+inputData/
+outputData/
 config.mjs
