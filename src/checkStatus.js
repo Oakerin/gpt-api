@@ -8,7 +8,18 @@ const openai = new OpenAI({
 });
 
 async function main() {
-  const batch_id = 'batch_6739e16bfccc81908e60864b114458d1'
+  let batch_id
+
+  try {
+    batch_id = process.argv.slice(2)[0]
+  } catch (e) {
+    console.log(e)
+  }
+
+  if (batch_id == null) {
+    throw new Error('batch_id is not defined')
+  }
+
   const outputFileName = config.outputFileName
   const batchStatus = await checkStatus(openai, batch_id)
 
