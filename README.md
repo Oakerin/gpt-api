@@ -3,7 +3,7 @@ Chat gpt connector to make some sience
 
 ## First steps 
 - [Install node.js](https://nodejs.org/en) v22.11.0 and higher
-- Run command: `npm install` to install dependencies
+- Run command in app root dir: `npm install` to install dependencies
 - Create a `config.mjs` file based on `config_tamplate.mjs`
 - Enjoy
 
