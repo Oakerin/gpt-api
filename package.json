@@ -1,12 +1,12 @@
 {
   "name": "gpt-faq",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "create": "node src/createInputData.js",
-    "send": "node src/index.js",
-    "convert": "node src/convertOutput.js"
+    "create": "node src/create.js",
+    "send": "node src/send.js",
+    "convert": "node src/convert.js",
+    "check": "node src/checkStatus.js"
   },
   "author": "",
   "license": "ISC",
