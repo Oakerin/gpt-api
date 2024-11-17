@@ -11,4 +11,4 @@ Chat gpt connector to make some sience
 - `npm run create` - create a set of test cases
 - `npm run send` - send test ceases to chat-gpt
 - `npm run convert` - convert chat-gpt output to readble file
-- `npm run checkStatus` - check your batch processing status
+- `npm run check` - check your batch processing status
