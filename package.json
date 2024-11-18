@@ -9,7 +9,7 @@
     "check": "node src/checkStatus.js"
   },
   "author": "Oakerin",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "openai": "^4.72.0"
