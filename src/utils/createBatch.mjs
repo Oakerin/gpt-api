@@ -9,8 +9,6 @@ async function createBatch(openai, file) {
   console.log('*****************BATCH******************');
   console.log('****************************************');
   console.log(batch);
-  console.log(batch.status);
-  console.log(batch.id);
 
   return batch
 }

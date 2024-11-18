@@ -10,7 +10,6 @@ async function createFile(openai, fileName) {
   console.log('*****************FILE*******************');
   console.log('****************************************');
   console.log(file);
-  console.log(file.id);
 
   return file
 }
