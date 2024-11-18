@@ -8,7 +8,7 @@
     "convert": "node src/convert.js",
     "check": "node src/checkStatus.js"
   },
-  "author": "",
+  "author": "Oakerin",
   "license": "ISC",
   "description": "",
   "dependencies": {
