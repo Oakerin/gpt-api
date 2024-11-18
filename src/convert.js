@@ -35,8 +35,6 @@ readInterface.on('close', function() {
                 .replace(/[0-9]/g, '')
                 .replaceAll(')', '')
             text += parsedT + '\n'
-            // console.log(parsedT)
-            // console.log('*****')
         })
 
     console.log(text);
