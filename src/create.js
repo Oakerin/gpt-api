@@ -36,7 +36,7 @@ async function main(userMessages) {
                 return {"custom_id": `${i}`, "method": "POST", "url": "/v1/chat/completions", "body": {"model": config.gptModel, "messages": messages, "max_tokens": 100}}
             })
     } else {
-        requests = [{"custom_id": '1', "method": "POST", "url": "/v1/chat/completions", "body": {"model": config.gptModel, "messages": userMessages, "max_tokens": 100}}]
+        requests = [{"custom_id": '1', "method": "POST", "url": "/v1/chat/completions", "body": {"model": config.gptModel, "messages": [systemMessage, ...userMessages], "max_tokens": 100}}]
     }
 
     for (let i = 0; i < repeatCount; i++) {
@@ -58,6 +58,7 @@ async function main(userMessages) {
         console.log('*****************DONE*******************');
         console.log('****************************************');
         console.log(`Input file: ${inputFileName} was created`);
+        console.log(`Request set type: ${requestType}`);
         console.log(`Requests set count: ${repeatCount}`);
     })
 }
