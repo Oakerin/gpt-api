@@ -31,6 +31,7 @@ readInterface.on('close', function() {
         )
         .forEach(t => {
             const parsedT = t[0]
+                .replaceAll(' ', '')
                 .replaceAll('\n', ' ')
                 // .replace(/[0-9]/g, '')
                 // .replaceAll(')', '')
