@@ -1,6 +1,7 @@
 import fs from "fs";
 import readline from 'readline';
 import { config } from "../config.mjs";
+import { makeRequests } from './utils/makeRequests.mjs'
 
 const inputFileName = `./src/inputData/${config.inputFileName}.jsonl`;
 const requestType = config.requestSetType
@@ -25,19 +26,7 @@ readInterface.on('close', () => {
 
 async function main(userMessages) {
     let text = ''
-    let requests
-
-    if (requestType === 'MULTIPLE') {
-        requests = userMessages
-            .map(userMessage => {
-                return [systemMessage, userMessage]
-            })
-            .map((messages, i) => {
-                return {"custom_id": `${i}`, "method": "POST", "url": "/v1/chat/completions", "body": {"model": config.gptModel, "messages": messages, "max_tokens": 100}}
-            })
-    } else {
-        requests = [{"custom_id": '1', "method": "POST", "url": "/v1/chat/completions", "body": {"model": config.gptModel, "messages": [systemMessage, ...userMessages], "max_tokens": 100}}]
-    }
+    let requests = makeRequests(requestType, userMessages, systemMessage, config.gptModel)
 
     for (let i = 0; i < repeatCount; i++) {
         requests
