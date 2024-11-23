@@ -16,12 +16,12 @@ function makeRequests(type = 'SINGLE', userMessages = [], systemMessage, model) 
                     return [systemMessage, userMessage]
                 })
                 .map((messages, i) => {
-                    return {"custom_id": `${i}`, "method": "POST", "url": "/v1/chat/completions", "body": {"model": model, "messages": messages, "max_tokens": 100}}
+                    return {"custom_id": `${i}`, "method": "POST", "url": "/v1/chat/completions", "body": {"model": model, "messages": messages, "max_tokens": 1000}}
                 })
             break;
 
         case 'SINGLE':
-            requests = [{"custom_id": '1', "method": "POST", "url": "/v1/chat/completions", "body": {"model": model, "messages": [systemMessage, ...userMessages], "max_tokens": 100}}]
+            requests = [{"custom_id": '1', "method": "POST", "url": "/v1/chat/completions", "body": {"model": model, "messages": [systemMessage, ...userMessages], "max_tokens": 1000}}]
             break;
     
         default:

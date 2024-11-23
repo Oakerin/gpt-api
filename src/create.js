@@ -2,11 +2,13 @@ import fs from "fs";
 import readline from 'readline';
 import { config } from "../config.mjs";
 import { makeRequests } from './utils/makeRequests.mjs'
+import { shuffleArray } from './utils/shuffleArray.mjs'
 
+const gptModel = config.gptModel
 const inputFileName = `./src/inputData/${config.inputFileName}.jsonl`;
 const requestType = config.requestSetType
 const repeatCount = config.requestSetRepeatCount
-const systemMessage = {"role": "system", "content": "In the following, we will present you 12 syllogism puzzles that have 2 premises and a conclusion (the sentence after 'Therefore'). Your task will be to judge whether the conclusion NECESSARLY from its two premises."}
+const systemMessage = {"role": "user", "content": "In the following, we will present you 4 syllogism puzzles that have 2 premises and a conclusion (the sentence after 'Therefore'). Your task will be to judge whether the conclusion NECESSARLY from its two premises. Please give an answer for each of these syllogisms. Your answers should contain only Yes or No and should not include any additional text"}
 const userMessages = []
 
 const readInterface = readline.createInterface({
@@ -26,12 +28,29 @@ readInterface.on('close', () => {
 
 async function main(userMessages) {
     let text = ''
-    let requests = makeRequests(requestType, userMessages, systemMessage, config.gptModel)
+    let requests = makeRequests(requestType, userMessages, systemMessage, gptModel)
 
     for (let i = 0; i < repeatCount; i++) {
         requests
             .map(request => { 
                 return { ...request, custom_id: `${i}-${request.custom_id}` }
+            })
+            // Shuffle for single type
+            .map(request => {
+                if (requestType === 'SINGLE') {
+                    const sysMeassage = request.body.messages[0]
+                    const shuffledUserMessages = shuffleArray([...request.body.messages].slice(1))
+    
+                    return { 
+                        ...request, 
+                        body: {
+                            ...request.body,
+                            messages: [sysMeassage, ...shuffledUserMessages] 
+                        }
+                    }
+                }
+
+                return request
             })
             .forEach(request => {
                 text += JSON.stringify(request) + '\n'
@@ -49,5 +68,6 @@ async function main(userMessages) {
         console.log(`Input file: ${inputFileName} was created`);
         console.log(`Request set type: ${requestType}`);
         console.log(`Requests set count: ${repeatCount}`);
+        console.log(`Chat gpt model: ${gptModel}`);
     })
 }
