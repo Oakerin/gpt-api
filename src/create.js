@@ -27,8 +27,9 @@ readInterface.on('close', () => {
 
 
 async function main(userMessages) {
-    let text = ''
+    const shuffledIndexes = []
     let requests = makeRequests(requestType, userMessages, systemMessage, gptModel)
+    let text = ''
 
     for (let i = 0; i < repeatCount; i++) {
         requests
@@ -38,8 +39,11 @@ async function main(userMessages) {
             // Shuffle for single type
             .map(request => {
                 if (requestType === 'SINGLE') {
+                    const indexes = []
                     const sysMeassage = request.body.messages[0]
-                    const shuffledUserMessages = shuffleArray([...request.body.messages].slice(1))
+
+                    const shuffledUserMessages = shuffleArray([...request.body.messages].slice(1), indexes)
+                    shuffledIndexes.push(indexes)
     
                     return { 
                         ...request, 
@@ -56,6 +60,13 @@ async function main(userMessages) {
                 text += JSON.stringify(request) + '\n'
             });
     }
+
+    // Create temp file with indexes
+    fs.writeFile('./src/inputData/shuffle_temp.json', JSON.stringify({ indexes: shuffledIndexes }), function(error){
+        if (error){ 
+            return console.log(error);
+        }
+    })
 
     fs.writeFile(inputFileName, text, function(error){
         if (error){ 

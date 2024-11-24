@@ -14,6 +14,7 @@ export const config = {
      * requestSetRepeatCount
      * This option is about how many times you want your request will be repeated
      */
+    requestSetRepeatCount: 5,
     maxRetryCount: 10,
     retryInterval: 30 * 1000, // msec
     gptModel: 'gpt-4o'
