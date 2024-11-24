@@ -41,15 +41,20 @@ async function main(userMessages) {
                 if (requestType === 'SINGLE') {
                     const indexes = []
                     const sysMeassage = request.body.messages[0]
+                    let shuffledUserMessage = ''
 
                     const shuffledUserMessages = shuffleArray([...request.body.messages].slice(1), indexes)
                     shuffledIndexes.push(indexes)
+
+                    shuffledUserMessages.forEach(message => {
+                        shuffledUserMessage += message.content + '\n\n'
+                    });
     
                     return { 
                         ...request, 
                         body: {
                             ...request.body,
-                            messages: [sysMeassage, ...shuffledUserMessages] 
+                            messages: [sysMeassage, {"role": "user", "content": shuffledUserMessage}] 
                         }
                     }
                 }
