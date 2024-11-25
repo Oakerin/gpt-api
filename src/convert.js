@@ -53,7 +53,11 @@ readInterface.on('close', function() {
             let answers = shuffledAnswers
             if (config.requestSetType === 'SINGLE') {
                 answers = []
-                let indexes = shuffleData.indexes[0]
+                let indexes = shuffleData.indexes[i]
+
+                console.log(indexes)
+                console.log(shuffledAnswers)
+
 
                 indexes.forEach((index, j) => {
                     answers[index] = shuffledAnswers[j]
